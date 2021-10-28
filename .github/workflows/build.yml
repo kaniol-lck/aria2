@@ -64,9 +64,11 @@ jobs:
       run: |
         make
         make check
+        make install
     - run: |
-        ls .lib/
+        mkdir libaria2
+        sudo cp /usr/local/lib/libaria2* libaria2/
     - uses: actions/upload-artifact@v2
       with:
         name: libaria2-libs
-        path: .lib/
+        path: libaria2/
