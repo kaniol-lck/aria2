@@ -68,5 +68,5 @@ jobs:
         ls .lib/
     - uses: actions/upload-artifact@v2
       with:
-        name: libaria2
+        name: libaria2-libs
         path: .lib/
