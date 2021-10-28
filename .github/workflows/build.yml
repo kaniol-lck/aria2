@@ -64,3 +64,9 @@ jobs:
       run: |
         make
         make check
+    - run: |
+        ls .lib/
+    - uses: actions/upload-artifact@v2
+      with:
+        name: libaria2
+        path: .lib/
