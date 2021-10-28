@@ -58,7 +58,7 @@ jobs:
       run: |
         ./configure \
           --without-openssl --without-gnutls --with-appletls \
-          --disable-nls \
+          --disable-nls --enable-libaria2 \
           CPPFLAGS="-fsanitize=address" LDFLAGS="-fsanitize=address"
     - name: Build aria2
       run: |
