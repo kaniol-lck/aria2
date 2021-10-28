@@ -64,8 +64,15 @@ jobs:
       run: |
         make
         make check
-        make install
-    - run: |
+        sudo make install
+    - name: Copy files (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        mkdir libaria2
+        sudo cp /usr/lib/libaria2* libaria2/
+    - name: Configure autotools (macOS)
+      if: runner.os == 'macOS'
+      run: |
         mkdir libaria2
         sudo cp /usr/local/lib/libaria2* libaria2/
     - uses: actions/upload-artifact@v2
