@@ -8,8 +8,8 @@ jobs:
       matrix:
         os: [ubuntu-22.04, macos-14]
         compiler: [gcc, clang]
-        crypto: [openssl, gnutls]
-        bittorrent: [with-bt, without-bt]
+        crypto: [openssl]
+        bittorrent: [with-bt]
         exclude:
         - os: macos-14
           crypto: gnutls
@@ -110,7 +110,7 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         mkdir libaria2
-        sudo cp /local/lib/libaria2* libaria2/
+        sudo cp /usr/local/lib/libaria2* libaria2/
     - uses: actions/upload-artifact@v2
       with:
         name: libaria2-libs-${{ matrix.compiler }}-${{ matrix.os }}
