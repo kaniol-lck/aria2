@@ -105,12 +105,12 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         mkdir libaria2
-        sudo cp /usr/local/lib/libaria2* libaria2/
+        sudo cp /local/lib/libaria2* libaria2/
     - name: Copy files (macOS)
       if: runner.os == 'macOS'
       run: |
         mkdir libaria2
-        sudo cp /usr/local/lib/libaria2* libaria2/
+        sudo cp /local/lib/libaria2* libaria2/
     - uses: actions/upload-artifact@v2
       with:
         name: libaria2-libs-${{ matrix.compiler }}-${{ matrix.os }}
