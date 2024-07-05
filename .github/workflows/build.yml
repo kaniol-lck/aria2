@@ -8,8 +8,8 @@ jobs:
       matrix:
         os: [ubuntu-22.04, macos-14]
         compiler: [gcc, clang]
-        crypto: [openssl]
-        bittorrent: [with-bt]
+        crypto: [openssl, gnutls]
+        bittorrent: [with-bt, without-bt]
         exclude:
         - os: macos-14
           crypto: gnutls
@@ -86,11 +86,11 @@ jobs:
     - name: Configure autotools (Linux, gnutls)
       if: runner.os == 'Linux' && matrix.crypto == 'gnutls'
       run: |
-        ./configure --with-gnutls --without-openssl $FEATURE_FLAGS
+        ./configure --with-gnutls --without-openssl --enable-libaria2 $FEATURE_FLAGS
     - name: Configure autotools (Linux, openssl)
       if: runner.os == 'Linux' && matrix.crypto == 'openssl'
       run: |
-        ./configure --without-gnutls --with-openssl $FEATURE_FLAGS
+        ./configure --without-gnutls --with-openssl --enable-libaria2 $FEATURE_FLAGS
     - name: Configure autotools (macOS)
       if: runner.os == 'macOS'
       run: |
@@ -105,7 +105,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         mkdir libaria2
-        sudo cp /local/lib/libaria2* libaria2/
+        sudo cp /usr/lib/libaria2* libaria2/
     - name: Copy files (macOS)
       if: runner.os == 'macOS'
       run: |
@@ -113,5 +113,5 @@ jobs:
         sudo cp /usr/local/lib/libaria2* libaria2/
     - uses: actions/upload-artifact@v2
       with:
-        name: libaria2-libs-${{ matrix.compiler }}-${{ matrix.os }}
+        name: libaria2-libs-${{ matrix.compiler }}-${{ matrix.os }}-${{ matrix.crypto }}-${{ matrix.bittorrent }}
         path: libaria2/
